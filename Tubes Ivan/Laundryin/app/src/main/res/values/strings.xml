@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Laundryin</string>
+    <string name="title_activity_login">LoginActivity</string>
+    <string name="data_paket">Paket ini menawarkan 4 Hari kerja dijamin cucian anda akan selesai. Di paket ini tersedia beberapa layanan yang sudah termasuk ke dalam paket 4 Hari ini di antaranya yaitu :</string>
+
+    <string name="home">Home</string>
+    <string name="message">Message</string>
+    <string name="profile">Profile</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>
