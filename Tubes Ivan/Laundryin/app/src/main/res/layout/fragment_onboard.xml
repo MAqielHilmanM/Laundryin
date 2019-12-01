@@ -6,10 +6,20 @@
     android:layout_height="match_parent"
     android:background="@drawable/gradient_blue"
     tools:context=".views.splash.SplashActivity">
+    <ImageView
+        android:id="@+id/ivOnboardImage"
+        android:src="@drawable/img_onboard1"
+        app:layout_constraintBottom_toTopOf="@id/tvOnboardTitle"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginBottom="8dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
     <TextView
+        android:id="@+id/tvOnboardTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Laundry.in"
+        android:text="Antar Jemput Cucian"
         android:textColor="@android:color/white"
         android:textSize="32dp"
         android:textStyle="bold"
@@ -18,14 +28,16 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"/>
     <TextView
+        android:id="@+id/tvOnboardSubtitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Laundry.in"
+        android:text="Melayani antar jemput cucian daerah sekitar kampus Telkom University"
         android:textColor="@android:color/white"
-        android:textSize="32dp"
-        android:textStyle="bold"
+        android:textSize="16dp"
+        android:textAlignment="center"
+        android:layout_marginTop="16dp"
+        android:paddingHorizontal="42dp"
+        app:layout_constraintTop_toBottomOf="@id/tvOnboardTitle"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        app:layout_constraintRight_toRightOf="parent"/>
 </android.support.constraint.ConstraintLayout>

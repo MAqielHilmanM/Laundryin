@@ -12,24 +12,17 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.creative.iam.laundryin.R;
+import com.creative.iam.laundryin.views.main.UtamaActivity;
 
 public class SignUpActivity extends AppCompatActivity {
     EditText etNama, etUsername, etPass, etTelp, etAlamat;
     Button btnDaftar;
     private ProgressDialog pDialog;
-    Intent intent;
 
     int success;
     ConnectivityManager conMgr;
 
-    private String url = "http://localhost/laundryin/login.php/register.php";
 
-    private static final String TAG = SignUpActivity.class.getSimpleName();
-
-    private static final String TAG_SUCCESS = "success";
-    private static final String TAG_MESSAGE = "message";
-
-    String tag_json_obj = "json_obj_req";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -81,6 +74,10 @@ public class SignUpActivity extends AppCompatActivity {
         pDialog.setMessage("Register ...");
         showDialog();
 
+        Intent in = new Intent(this, UtamaActivity.class);
+        startActivity(in);
+        hideDialog();
+        finish();
     }
 
     private void showDialog() {

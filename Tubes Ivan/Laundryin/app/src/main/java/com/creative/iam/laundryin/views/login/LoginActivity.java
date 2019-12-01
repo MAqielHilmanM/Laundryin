@@ -13,7 +13,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.creative.iam.laundryin.R;
-import com.creative.iam.laundryin.views.main.MainActivity;
+import com.creative.iam.laundryin.views.main.UtamaActivity;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -24,7 +24,6 @@ public class LoginActivity extends AppCompatActivity {
 
     int success;
     ConnectivityManager conMgr;
-    private String url= "http://localhost/laundryin/login.php";
     private static final String TAG = LoginActivity.class.getSimpleName();
 
     private static final String TAG_SUCCESS = "success";
@@ -65,7 +64,7 @@ public class LoginActivity extends AppCompatActivity {
         username = sharedPreferences.getString(TAG_USERNAME, null);
 
         if (session) {
-            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+            Intent intent = new Intent(LoginActivity.this, UtamaActivity.class);
             intent.putExtra(TAG_USERNAME, username);
             finish();
             startActivity(intent);
@@ -98,6 +97,11 @@ public class LoginActivity extends AppCompatActivity {
         pDialog.setCancelable(false);
         pDialog.setMessage("Logging in ...");
         showDialog();
+
+        Intent intent = new Intent(LoginActivity.this, UtamaActivity.class);
+        hideDialog();
+        startActivity(intent);
+        finish();
 
     }
     private void showDialog() {

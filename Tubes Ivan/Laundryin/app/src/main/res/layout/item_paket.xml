@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="24dp"
+    android:layout_marginRight="24dp"
+    android:layout_marginBottom="16dp"
+    android:elevation="8dp"
+    app:cardCornerRadius="8dp">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.joooonho.SelectableRoundedImageView
+            android:id="@+id/srivItemReview"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_marginVertical="12dp"
+            android:layout_marginLeft="12dp"
+            android:layout_marginRight="8dp"
+            android:src="@android:color/darker_gray"
+            app:sriv_oval="true" />
+
+        <TextView
+            android:id="@+id/tvItemReviewName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/srivItemReview"
+            android:text="David Gueta"
+            android:textSize="18sp"
+            android:layout_marginTop="12dp"
+            android:layout_toLeftOf="@id/tvItemReviewDate"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tvItemReviewDesc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tvItemReviewName"
+            android:layout_marginTop="8dp"
+            android:layout_toRightOf="@id/srivItemReview"
+            android:lineHeight="16dp"
+            android:layout_marginRight="12dp"
+            android:layout_marginBottom="12dp"
+            android:text="Rekomendasi banget paket hemat ini, murah banget dan cepat" />
+
+        <TextView
+            android:id="@+id/tvItemReviewDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_alignTop="@id/tvItemReviewName"
+            android:layout_alignBottom="@id/tvItemReviewName"
+            android:layout_alignParentEnd="true"
+            android:textSize="8sp"
+            android:layout_marginRight="12dp"
+            android:text="12/04/2018 12:11 WIB" />
+    </RelativeLayout>
+</android.support.v7.widget.CardView>

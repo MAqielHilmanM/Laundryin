@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".views.paket.PaketActivity">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:ignore="MissingConstraints"
+        android:orientation="vertical">
+    <android.support.v7.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:ignore="MissingConstraints"
+        android:layout_weight="1"
+        >
+        <TextView
+            android:id="@+id/titleDetail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Paket Hemat"
+            android:textColor="@color/colorBtnPrimary"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:layout_marginLeft="24dp"
+            android:layout_marginRight="24dp"
+            />
+    </android.support.v7.widget.Toolbar>
+        <TextView
+            android:id="@+id/tvPaketPrice"
+            android:layout_marginLeft="24dp"
+            android:layout_marginRight="24dp"
+            android:layout_marginTop="16dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="18dp"
+            android:textStyle="bold"
+            android:lineHeight="24dp"
+            android:text="Harga : Rp. 5.000 / Kg"
+            />
+        <TextView
+            android:id="@+id/descDetail"
+            android:layout_marginLeft="24dp"
+            android:layout_marginRight="24dp"
+            android:layout_marginTop="16dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16dp"
+            android:lineHeight="24dp"
+            android:text="@string/data_paket"
+            />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            >
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="24dp"
+                android:layout_weight="1"
+                android:text="Ulasan Paket"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rvPaket"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        <Button
+            android:id="@+id/btnPaketOrder"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="24dp"
+            android:layout_marginLeft="24dp"
+            android:layout_marginTop="24dp"
+            android:padding="16dp"
+            android:text="Pesan"
+            android:background="@color/colorBtnPrimary"
+            android:textColor="@android:color/white"
+            android:textSize="16sp"
+            />
+    </LinearLayout>
+</android.support.constraint.ConstraintLayout>

@@ -11,23 +11,26 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".views.splash.SplashActivity"></activity>
-        <activity android:name=".views.order.detail.DetailPesanan" />
-        <activity android:name=".views.main.UtamaActvity" />
-        <activity android:name=".views.notification.NotifikasiActivity" />
-        <activity android:name=".views.order.success.PesanBerhasilActvity" />
-        <activity android:name=".views.paket.DetailPaketLaundry" />
-        <activity android:name=".views.registrasi.SignUpActivity" />
-        <activity
-            android:name=".views.login.LoginActivity"
-            android:label="@string/title_activity_login"
-            android:theme="@style/AppTheme.NoActionBar">
+        <activity android:name=".views.order.confirm.ConfirmPesananActivity"></activity>
+        <activity android:name=".views.splash.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".views.order.detail.DetailPesananActivity" />
+        <activity android:name=".views.main.UtamaActivity" />
+        <activity android:name=".views.notification.NotifikasiActivity" />
+        <activity android:name=".views.order.success.PesanBerhasilActivity" />
+        <activity android:name=".views.paket.PaketActivity" />
+        <activity android:name=".views.registrasi.SignUpActivity" />
+        <activity
+            android:name=".views.login.LoginActivity"
+            android:label="@string/title_activity_login"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+        <activity android:name=".views.onboard.OnboardActivity" />
     </application>
 
 </manifest>
