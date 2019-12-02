@@ -7,7 +7,7 @@
 	$username = $_POST["username"];
 	$password = $_POST["password"];
 	$nama = $_POST["nama"];
-	$email = $_POST["email"];
+	$phone = $_POST["phone"];
 	$alamat = $_POST["alamat"];
 
 	if ((empty($nama))) {
@@ -29,11 +29,11 @@
 		$response->data = null;
 		die(json_encode($response));
 	}else {
-		if (!empty($username) && !empty($password) && !empty($nama) && !empty($email) && !empty($alamat)){
+		if (!empty($username) && !empty($password) && !empty($nama) && !empty($phone) && !empty($alamat)){
 			$num_rows = mysqli_num_rows(mysqli_query($con, "SELECT * FROM tb_pelanggan WHERE username='".$username."'"));
 
 			if ($num_rows == 0){
-				$query = mysqli_query($con, "INSERT INTO tb_pelanggan ( username, password, nama, alamat, email) VALUES('".$username."','".$password."','".$nama."','".$alamat."','".$email."')");
+				$query = mysqli_query($con, "INSERT INTO tb_pelanggan ( username, password, nama, alamat, phone) VALUES('".$username."','".$password."','".$nama."','".$alamat."','".$phone."')");
 
 				if ($query){
 					$response = new usr();

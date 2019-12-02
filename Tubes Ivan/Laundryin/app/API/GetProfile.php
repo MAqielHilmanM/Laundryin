@@ -11,7 +11,7 @@
 		$response = new usr();
 		$response->status = 1;
 		$response->message = "Ambil Paket Berhasil";
-		$datas = array();
+		$datas = new usr();
 
 		while($row = mysqli_fetch_assoc($query)){
 			$datas = array(
@@ -19,7 +19,7 @@
 				"password" => $row['password'],
 				"nama" => $row['nama'],
 				"alamat" => $row['alamat'],
-				"email" => $row['email'],
+				"phone" => $row['phone'],
 				"pakaian" => $row['pakaian'],
 				"url_picture" => "https://lh5.googleusercontent.com/-bIqOWtgzJNc/Unzk7VGz3QI/AAAAAAAAByY/E6VftXSSwno/s1600/IMG_20131108_192941.jpg"
 			);		

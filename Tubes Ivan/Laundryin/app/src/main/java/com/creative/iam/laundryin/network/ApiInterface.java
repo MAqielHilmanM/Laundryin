@@ -4,6 +4,7 @@ import com.creative.iam.laundryin.network.response.BaseDao;
 import com.creative.iam.laundryin.network.response.DoDeliveryResponseDao;
 import com.creative.iam.laundryin.network.response.DoOrderResponseDao;
 import com.creative.iam.laundryin.network.response.DoTransactionResponseDao;
+import com.creative.iam.laundryin.network.response.DoUlasanResponseDao;
 import com.creative.iam.laundryin.network.response.GetAllOrderResponseDao;
 import com.creative.iam.laundryin.network.response.GetAllPacketResponseDao;
 import com.creative.iam.laundryin.network.response.GetOrderResponseDao;
@@ -58,6 +59,14 @@ public interface ApiInterface {
     Call<BaseDao<DoDeliveryResponseDao>> doDelivery(
         @Field("kode_transaksi") String kodeTransaksi,
         @Field("id_kurir") String idKurir
+    );
+
+    @POST("DoUlasan.php")
+    @FormUrlEncoded
+    Call<BaseDao<DoUlasanResponseDao>> doUlasan(
+        @Field("id_paket") String id_paket,
+        @Field("username") String username,
+        @Field("ulasan") String ulasan
     );
 
     @GET("GetAllPackets.php")

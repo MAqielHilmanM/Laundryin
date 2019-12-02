@@ -5,7 +5,7 @@
 	
 	$id = $_GET['id_order'];
 
-	$query = mysqli_query($con, "SELECT * FROM tb_order o LEFT JOIN tb_transaksi t ON o.id_order = t.id_order WHERE o.id_order='$id'");
+	$query = mysqli_query($con, "SELECT * FROM tb_paketlaundry p JOIN tb_order o ON p.id_paket = o.id_paket LEFT JOIN tb_transaksi t ON o.id_order = t.id_order WHERE o.id_order='$id'");
 			
 	if ($query){
 		$response = new usr();
@@ -19,7 +19,14 @@
 				"tgl_order" => $row['tgl_order'],
 				"tgl_selesai" => $row['tgl_selesai'],
 				"username" => $row['username'],
+				"id_paket" => $row['id_paket'],
+				"catatan" => $row['catatan'],
+				"address" => $row['address'],
 				"status" => $row['status'],
+				"nama_paket" => $row['nama_paket'],
+				"harga_paket" => $row['harga_paket'],
+				"estimasi_paket" => $row['estimasi_paket'],
+				"keterangan" => $row['keterangan'],
 				"kode_transaksi" => $row['kode_transaksi'],
 				"total_bayar" => $row['total_bayar'],
 				"tgl_transaksi" => $row['tgl_transaksi']

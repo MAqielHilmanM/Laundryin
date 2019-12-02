@@ -16,8 +16,8 @@
 	
 	$query = mysqli_query($con, "SELECT * FROM tb_pelanggan WHERE username='$username' AND password='$password'");
 
-	
-	if ($query){
+	$num = mysqli_num_rows($query);
+	if ($num > 0){
 		$row = mysqli_fetch_array($query);
 
 		$response = new usr();
@@ -27,7 +27,7 @@
 			"username" => $row['username'],
 			"nama" => $row['nama'],
 			"alamat" => $row['alamat'],
-			"email" => $row['email'],
+			"phone" => $row['phone'],
 			"pakaian" => $row['pakaian']
 		);
 
