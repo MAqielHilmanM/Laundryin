@@ -19,8 +19,8 @@ public class ApiClient {
     public Retrofit getClient(String baseUrl){
         if(mApi == null){
             OkHttpClient.Builder builder = new OkHttpClient.Builder();
-            builder.readTimeout(10, TimeUnit.SECONDS);
-            builder.connectTimeout(5, TimeUnit.SECONDS);
+            builder.readTimeout(30, TimeUnit.SECONDS);
+            builder.connectTimeout(20, TimeUnit.SECONDS);
 
             HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
             interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);

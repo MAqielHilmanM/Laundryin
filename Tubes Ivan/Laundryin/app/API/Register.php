@@ -12,18 +12,21 @@
 
 	if ((empty($nama))) {
 		$response = new usr();
-		$response->success = 0;
+		$response->status = 0;
 		$response->message = "Kolom nama tidak boleh kosong";
+		$response->data = null;
 		die(json_encode($response));
 	} else if ((empty($password))) {
 		$response = new usr();
-		$response->success = 0;
+		$response->status = 0;
 		$response->message = "Kolom password tidak boleh kosong";
+		$response->data = null;
 		die(json_encode($response));
 	} else if ((empty($password))) {
 		$response = new usr();
-		$response->success = 0;
+		$response->status = 0;
 		$response->message = "Kolom password tidak boleh kosong";
+		$response->data = null;
 		die(json_encode($response));
 	}else {
 		if (!empty($username) && !empty($password) && !empty($nama) && !empty($email) && !empty($alamat)){
@@ -34,20 +37,23 @@
 
 				if ($query){
 					$response = new usr();
-					$response->success = 1;
+					$response->status = 1;
 					$response->message = "Register berhasil, silahkan login.";
+					$response->data = null;
 					die(json_encode($response));
 
 				} else {
 					$response = new usr();
-					$response->success = 0;
+					$response->status = 0;
 					$response->message = "Username sudah ada";
+					$response->data = null;
 					die(json_encode($response));
 				}
 			} else {
 				$response = new usr();
-				$response->success = 0;
+				$response->status = 0;
 				$response->message = "Username sudah ada";
+				$response->data = null;
 				die(json_encode($response));
 			}
 		}

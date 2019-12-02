@@ -7,19 +7,32 @@ import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.creative.iam.laundryin.R;
+import com.creative.iam.laundryin.network.ApiClient;
+import com.creative.iam.laundryin.network.ApiInterface;
+import com.creative.iam.laundryin.network.response.BaseDao;
+import com.creative.iam.laundryin.network.response.LoginResponseDao;
+import com.creative.iam.laundryin.tools.Constant;
+import com.creative.iam.laundryin.tools.Tools;
 import com.creative.iam.laundryin.views.main.UtamaActivity;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class LoginActivity extends AppCompatActivity {
 
     ProgressDialog pDialog;
     EditText etLoginUser, etLoginPass;
     Button btnLogin;
+    TextView tvRegister;
     Intent intent;
 
     int success;
@@ -58,6 +71,10 @@ public class LoginActivity extends AppCompatActivity {
         btnLogin = (Button) findViewById(R.id.btnLogin);
         etLoginUser = (EditText) findViewById(R.id.etLoginUser);
         etLoginPass = (EditText) findViewById(R.id.etLoginPass);
+        tvRegister = findViewById(R.id.tvRegister);
+
+        Tools.loadTextFromHTML(tvRegister,
+                "Belum punya akun ? <b><font color=\"#2398CD\"> Daftar </font></b>");
 
         sharedPreferences = getSharedPreferences(my_shared_preferences, Context.MODE_PRIVATE);
         session = sharedPreferences.getBoolean(session_status, false);
@@ -98,10 +115,28 @@ public class LoginActivity extends AppCompatActivity {
         pDialog.setMessage("Logging in ...");
         showDialog();
 
-        Intent intent = new Intent(LoginActivity.this, UtamaActivity.class);
-        hideDialog();
-        startActivity(intent);
-        finish();
+        ApiInterface apiClient = new ApiClient().getClient(Constant.BASE_URL).create(ApiInterface.class);
+        apiClient.doLogin(username,password).enqueue(new Callback<BaseDao<LoginResponseDao>>() {
+            @Override
+            public void onResponse(Call<BaseDao<LoginResponseDao>> call, Response<BaseDao<LoginResponseDao>> response) {
+                hideDialog();
+                if(response.body().getCode() == 1){
+                    sharedPreferences.edit().putString(TAG_USERNAME,response.body().getData().getUsername()).putBoolean(session_status,true).apply();
+                    Intent intent = new Intent(LoginActivity.this, UtamaActivity.class);
+                    startActivity(intent);
+                    finish();
+                }else {
+                    Toast.makeText(getApplicationContext(), "Please Check your Credentials", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<BaseDao<LoginResponseDao>> call, Throwable t) {
+                hideDialog();
+                Log.e(TAG, "onFailure: "+t.getMessage() );
+                Toast.makeText(getApplicationContext(), t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
 
     }
     private void showDialog() {

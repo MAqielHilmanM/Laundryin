@@ -26,12 +26,11 @@ public class ProfileSubAdapter extends RecyclerView.Adapter<ProfileSubAdapter.Vi
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         context = viewGroup.getContext();
-        return new ViewHolder(LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_profile_sub,viewGroup));
+        return new ViewHolder(LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_profile_sub,viewGroup,false));
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
-
         viewHolder.initData(lists.get(i));
         viewHolder.initListener(context,lists.get(i));
     }

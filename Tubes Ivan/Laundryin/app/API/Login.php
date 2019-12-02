@@ -8,8 +8,9 @@
 	
 	if ((empty($username)) || (empty($password))) { 
 		$response = new usr();
-		$response->success = 0;
+		$response->status = 0;
 		$response->message = "Kolom tidak boleh kosong"; 
+		$response->data = null;
 		die(json_encode($response));
 	}
 	
@@ -20,7 +21,7 @@
 		$row = mysqli_fetch_array($query);
 
 		$response = new usr();
-		$response->success = 1;
+		$response->status = 1;
 		$response->message = "Login success";
 		$response->data = array(
 			"username" => $row['username'],
@@ -34,8 +35,9 @@
 		
 	} else { 
 		$response = new usr();
-		$response->success = 0;
-		$response->message = $query->error;
+		$response->status = 0;
+		$response->message = "Login gagal";
+		$response->data = null;
 		die(json_encode($response));
 	}
 	

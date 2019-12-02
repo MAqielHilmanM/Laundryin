@@ -3,13 +3,17 @@
 
 	class usr{}
 	
-	$username = $_GET['username'];
-	
-	$query = mysqli_query($con, "SELECT * FROM tb_order WHERE username='$username'");
+	$query = "";
+	if(isset($_GET['username'])){
+		$username = $_GET['username'];
+		$query = mysqli_query($con, "SELECT * FROM tb_order WHERE username='$username'");
+	}else {
+		$query = mysqli_query($con, "SELECT * FROM tb_order");
+	}
 			
 	if ($query){
 		$response = new usr();
-		$response->success = 1;
+		$response->status = 1;
 		$response->message = "Ambil Order Berhasil";
 		$datas = array();
 
@@ -29,8 +33,9 @@
 		
 	} else { 
 		$response = new usr();
-		$response->success = 0;
-		$response->message = $query->error;
+		$response->status = 0;
+		$response->message = "Gagal mengambil order";
+		$response->data = null;
 		die(json_encode($response));
 	}
 	

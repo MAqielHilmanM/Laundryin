@@ -5,11 +5,11 @@
 	
 	$id = $_GET['id_order'];
 
-	$query = mysqli_query($con, "SELECT * FROM tb_order WHERE id_order='$id'");
+	$query = mysqli_query($con, "SELECT * FROM tb_order o LEFT JOIN tb_transaksi t ON o.id_order = t.id_order WHERE o.id_order='$id'");
 			
 	if ($query){
 		$response = new usr();
-		$response->success = 1;
+		$response->status = 1;
 		$response->message = "Ambil Order Berhasil";
 		$datas = array();
 
@@ -19,7 +19,10 @@
 				"tgl_order" => $row['tgl_order'],
 				"tgl_selesai" => $row['tgl_selesai'],
 				"username" => $row['username'],
-				"status" => $row['status']
+				"status" => $row['status'],
+				"kode_transaksi" => $row['kode_transaksi'],
+				"total_bayar" => $row['total_bayar'],
+				"tgl_transaksi" => $row['tgl_transaksi']
 			);		
 		}
 		
@@ -29,8 +32,9 @@
 		
 	} else { 
 		$response = new usr();
-		$response->success = 0;
-		$response->message = $query->error;
+		$response->status = 0;
+		$response->message = "failed to get order";
+		$response->data = null;
 		die(json_encode($response));
 	}
 	

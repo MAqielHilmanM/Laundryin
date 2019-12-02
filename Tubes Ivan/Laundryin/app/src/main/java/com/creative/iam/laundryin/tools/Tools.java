@@ -1,8 +1,11 @@
 package com.creative.iam.laundryin.tools;
 
 import android.content.Context;
+import android.os.Build;
+import android.text.Html;
 import android.text.TextUtils;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.creative.iam.laundryin.R;
@@ -34,6 +37,14 @@ public class Tools {
                     .placeholder(R.color.colorPrimaryDark)
                     .error(android.R.color.holo_red_light)
                     .into(imageView);
+        }
+    }
+
+    public static void loadTextFromHTML(TextView tv, String source){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            tv.setText(Html.fromHtml(source, Html.FROM_HTML_MODE_COMPACT));
+        } else {
+            tv.setText(Html.fromHtml(source));
         }
     }
 }

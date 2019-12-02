@@ -1,7 +1,9 @@
 package com.creative.iam.laundryin.views.main.profile;
 
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -59,6 +61,8 @@ public class ProfileFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), LoginActivity.class);
+                SharedPreferences sharedPreferences = getActivity().getSharedPreferences("my_shared_preferences", Context.MODE_PRIVATE);
+                sharedPreferences.edit().clear().apply();
                 getActivity().startActivity(intent);
                 getActivity().finish();
             }

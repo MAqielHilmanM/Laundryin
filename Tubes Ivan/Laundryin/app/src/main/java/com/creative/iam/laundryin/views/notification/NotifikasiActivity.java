@@ -4,6 +4,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
+import android.view.View;
 
 import com.creative.iam.laundryin.R;
 import com.creative.iam.laundryin.views.paket.PaketAdapter;
@@ -19,10 +21,23 @@ public class NotifikasiActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_notifikasi);
 
+        initToolbar();
         initRecycler();
         loadDummy();
     }
 
+    public void initToolbar(){
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
+    }
 
     List<NotifikasiModel> lists = new ArrayList<>();
     RecyclerView recyclerView;

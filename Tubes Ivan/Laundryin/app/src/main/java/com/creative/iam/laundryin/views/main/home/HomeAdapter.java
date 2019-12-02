@@ -60,12 +60,13 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
             Tools.loadImage(ivItemHome,model.getPicture());
         }
 
-        public void initListener(final Context context, HomeModel model){
+        public void initListener(final Context context, final HomeModel model){
             itemView.setOnClickListener(
                     new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
                             Intent intent = new Intent(context, PaketActivity.class);
+                            intent.putExtra("id",model.getId());
                             context.startActivity(intent);
                         }
                     }

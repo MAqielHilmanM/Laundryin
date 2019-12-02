@@ -4,27 +4,30 @@
 	
 	class usr{}
 
-	$kodeTransaksi = $_POST["kode_transaksi"];
-	$idKurir = $_POST["id_kurir"];
+	$nama_paket = $_POST["nama_paket"];
+	$harga_paket = $_POST["harga_paket"];
+	$estimasi_paket = $_POST["estimasi_paket"];
+	$keterangan = $_POST["keterangan"];
+	$url_picture = $_POST["url_picture"];
 
-	if ((empty($kodeTransaksi))) {
+	if ((empty($nama_paket))) {
 		$response = new usr();
 		$response->status = 0;
-		$response->message = "kode Transaksi tidak boleh kosong";
+		$response->message = "Nama Paket tidak boleh kosong";
 		$response->data = null;
 		die(json_encode($response));
-	} else if ((empty($idKurir))) {
+	} else if ((empty($harga_paket))) {
 		$response = new usr();
 		$response->status = 0;
-		$response->message = "id kurir tidak boleh kosong";
+		$response->message = "Harga Paket tidak boleh kosong";
 		$response->data = null;
 		die(json_encode($response));
 	} else {
 
-		$query = mysqli_query($con, "INSERT INTO `tb_delivery` (`kode_transaksi`, `id_kurir`) VALUES ('$kodeTransaksi', '$idKurir')");
+		$query = mysqli_query($con, "INSERT INTO `tb_paketlaundry` VALUES (null,'$nama_paket','$harga_paket','$estimasi_paket','$keterangan', '$url_picture')");
 
 		if ($query){
-			$query2 = mysqli_query($con, "SELECT * FROM tb_delivery WHERE kode_transaksi = '$kodeTransaksi' AND id_kurir='$idKurir' ORDER BY id_delivery ASC");
+			$query2 = mysqli_query($con, "SELECT LAST_INSERT_ID() as lastId");
 			if($query2){
 				$response = new usr();
 				$response->status = 1;
@@ -33,10 +36,11 @@
 		
 				while($row = mysqli_fetch_assoc($query2)){
 					$datas = array(
-						"id_delivery" => $row['id_delivery'],
-						"kode_transaksi" => $row['kode_transaksi'],
-						"id_kurir" => $row['id_kurir'],
-						"tgl_delivery" => $row['tgl_delivery']
+						"id_paket" => $row['lastId'],
+						"nama_paket" => $nama_paket,
+						"harga_paket" => $harga_paket,
+						"estimasi_paket" => $estimasi_paket,
+						"url_picture" => $url_picture
 					);		
 				}
 				

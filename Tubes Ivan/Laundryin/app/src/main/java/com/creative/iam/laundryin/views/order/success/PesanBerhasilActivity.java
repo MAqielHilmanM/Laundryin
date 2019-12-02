@@ -18,8 +18,8 @@ public class PesanBerhasilActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pesan_berhasil);
 
-        initListener();
         initData();
+        initListener();
     }
 
     private void initData(){
