@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,17 +19,25 @@ import com.creative.iam.laundryin.network.ApiInterface;
 import com.creative.iam.laundryin.network.response.BaseDao;
 import com.creative.iam.laundryin.network.response.DoUlasanResponseDao;
 import com.creative.iam.laundryin.network.response.GetAllOrderResponseDao;
+import com.creative.iam.laundryin.network.response.GetAllPacketResponseDao;
 import com.creative.iam.laundryin.network.response.GetOrderResponseDao;
+import com.creative.iam.laundryin.network.response.UpdateStatusOrderResponseDao;
 import com.creative.iam.laundryin.tools.Constant;
 import com.creative.iam.laundryin.tools.PreferencesUtils;
 import com.creative.iam.laundryin.tools.Tools;
 import com.creative.iam.laundryin.views.notification.NotifikasiActivity;
 import com.creative.iam.laundryin.views.notification.NotifikasiModel;
+import com.creative.iam.laundryin.views.paket.PaketModel;
+
+import org.angmarch.views.NiceSpinner;
+import org.angmarch.views.OnSpinnerItemSelectedListener;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -46,10 +55,14 @@ public class DetailPesananActivity extends AppCompatActivity {
             tvDetailPrice,
             tvDetailIsPaid;
     Button btnDetailPesanan;
+    NiceSpinner spDetailPesanan;
 
     BottomSheetDialog sheetDialog;
 
     String paketId;
+
+    int selectedId = -1;
+    boolean isAdmin = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -141,6 +154,17 @@ public class DetailPesananActivity extends AppCompatActivity {
 
                     tvDetailPrice.setText(data.getTotal_bayar());
                     paketId = data.getId_paket();
+
+                    if (isAdmin){
+                        final String orderId = data.getId_order();
+                        btnDetailPesanan.setVisibility(View.VISIBLE);
+                        btnDetailPesanan.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                updateStatus(orderId);
+                            }
+                        });
+                    }
                 } else {
                     Toast.makeText(DetailPesananActivity.this, "Delete", Toast.LENGTH_SHORT).show();
                 }
@@ -150,6 +174,27 @@ public class DetailPesananActivity extends AppCompatActivity {
             public void onFailure(Call<BaseDao<GetOrderResponseDao>> call, Throwable t) {
                 Log.e(this.getClass().getSimpleName(), "onFailure: " + t.getMessage());
                 Toast.makeText(DetailPesananActivity.this, t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    public void updateStatus(String orderId){
+        ApiInterface apiInterface = new ApiClient().getClient(Constant.BASE_URL).create(ApiInterface.class);
+        apiInterface.updateStatusOrder(orderId,String.valueOf(selectedId)).enqueue(new Callback<BaseDao<UpdateStatusOrderResponseDao>>() {
+            @Override
+            public void onResponse(Call<BaseDao<UpdateStatusOrderResponseDao>> call, Response<BaseDao<UpdateStatusOrderResponseDao>> response) {
+                if(response.body().getCode() == 1){
+                    Toast.makeText(getApplicationContext(), "Berhasil Mengubah Status", Toast.LENGTH_SHORT).show();
+                    finish();
+                }else {
+                    Toast.makeText(getApplicationContext(), "Gagal Mengubah Status", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<BaseDao<UpdateStatusOrderResponseDao>> call, Throwable t) {
+                Log.e(this.getClass().getSimpleName(), "onFailure: "+t.getMessage() );
+                Toast.makeText(getApplicationContext(), t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -165,6 +210,41 @@ public class DetailPesananActivity extends AppCompatActivity {
         tvDetailPrice = findViewById(R.id.tvDetailPrice);
         tvDetailIsPaid = findViewById(R.id.tvDetailIsPaid);
         btnDetailPesanan = findViewById(R.id.btnDetailPesanan);
+        spDetailPesanan = findViewById(R.id.spDetailPesanan);
+
+        List<String> listStatus = new ArrayList<>();
+        listStatus.add("Menunggu Diambil");
+        listStatus.add("Pakaian Dicuci");
+        listStatus.add("Pakaian Dikirim");
+        listStatus.add("Pesanan Selesai");
+        listStatus.add("Pesanan Gagal");
+
+        Tools.buildSpinner(
+                this,
+                spDetailPesanan,
+                listStatus,
+                new OnSpinnerItemSelectedListener() {
+                    @Override
+                    public void onItemSelected(NiceSpinner parent, View view, int position, long id) {
+                        if (position > 3){
+                            selectedId = -1;
+                        }else {
+                            selectedId = position;
+                        }
+                    }
+                },
+                0
+        );
+
+        PreferencesUtils sp = new PreferencesUtils(this.getApplicationContext());
+        String username = sp.get("uname", Constant.SAVED_USERNAME);
+        if(!username.equalsIgnoreCase("admin")){
+            spDetailPesanan.setVisibility(View.GONE);
+        }else {
+            spDetailPesanan.setVisibility(View.VISIBLE);
+        }
+
+        isAdmin = username.equalsIgnoreCase("admin");
     }
 
 

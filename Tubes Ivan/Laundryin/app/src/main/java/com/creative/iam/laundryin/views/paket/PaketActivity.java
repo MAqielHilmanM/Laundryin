@@ -18,6 +18,7 @@ import com.creative.iam.laundryin.network.ApiInterface;
 import com.creative.iam.laundryin.network.response.BaseDao;
 import com.creative.iam.laundryin.network.response.GetAllPacketResponseDao;
 import com.creative.iam.laundryin.tools.Constant;
+import com.creative.iam.laundryin.tools.PreferencesUtils;
 import com.creative.iam.laundryin.tools.Tools;
 import com.creative.iam.laundryin.views.login.LoginActivity;
 import com.creative.iam.laundryin.views.main.UtamaActivity;
@@ -55,6 +56,15 @@ public class PaketActivity extends AppCompatActivity {
         tvPaketPrice = findViewById(R.id.tvPaketPrice);
         tvDescDetail = findViewById(R.id.descDetail);
         btnPaketOrder = findViewById(R.id.btnPaketOrder);
+
+
+        PreferencesUtils sp = new PreferencesUtils(this.getApplicationContext());
+        String username = sp.get("uname", Constant.SAVED_USERNAME);
+        if(!username.equalsIgnoreCase("admin")){
+            btnPaketOrder.setVisibility(View.GONE);
+        }else {
+            btnPaketOrder.setVisibility(View.VISIBLE);
+        }
     }
 
 

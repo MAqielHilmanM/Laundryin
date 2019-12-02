@@ -3,7 +3,6 @@ package com.creative.iam.laundryin.views.main.profile;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -19,8 +18,6 @@ import com.creative.iam.laundryin.network.response.BaseDao;
 import com.creative.iam.laundryin.network.response.GetAllOrderResponseDao;
 import com.creative.iam.laundryin.tools.Constant;
 import com.creative.iam.laundryin.tools.PreferencesUtils;
-import com.creative.iam.laundryin.views.main.home.HomeAdapter;
-import com.creative.iam.laundryin.views.main.home.HomeModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,7 +26,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class ProfileSubFragment extends Fragment {
+public class ProfileSubFragment2 extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -38,9 +35,7 @@ public class ProfileSubFragment extends Fragment {
         View v =  inflater.inflate(R.layout.fragment_profile_sub, container, false);
 
         initRecycler(v);
-        if(getArguments() !=null){
             loadData();
-        }
 
         return v;
     }
@@ -54,7 +49,6 @@ public class ProfileSubFragment extends Fragment {
     }
 
     private void loadData() {
-        final boolean isHistory = getArguments().getBoolean("type", false);
         PreferencesUtils sp = new PreferencesUtils(getActivity().getApplicationContext());
         String username = sp.get("uname", Constant.SAVED_USERNAME);
 
@@ -68,20 +62,11 @@ public class ProfileSubFragment extends Fragment {
                     lists.clear();
                     for (GetAllOrderResponseDao order: response.body().getData()
                          ) {
-                        if (isHistory){
-                            if (!order.getStatus().equals("0")){
-                                lists.add(new ProfileSubModel(
-                                        order.getId_order(),
-                                        Integer.valueOf(order.getStatus())
-                                ));
-                            }
-                        }else {
-                            if (!order.getStatus().equals("3") && !order.getStatus().equals("-1")){
-                                lists.add(new ProfileSubModel(
-                                        order.getId_order(),
-                                        Integer.valueOf(order.getStatus())
-                                ));
-                            }
+                        if (order.getStatus().equals("3") || order.getStatus().equals("-1")){
+                            lists.add(new ProfileSubModel(
+                                    order.getId_order(),
+                                    Integer.valueOf(order.getStatus())
+                            ));
                         }
                     }
                     recyclerView.getAdapter().notifyDataSetChanged();

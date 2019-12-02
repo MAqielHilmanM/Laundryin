@@ -11,7 +11,11 @@ import android.widget.Toast;
 import com.creative.iam.laundryin.R;
 import com.squareup.picasso.Picasso;
 
+import org.angmarch.views.NiceSpinner;
+import org.angmarch.views.OnSpinnerItemSelectedListener;
+
 import java.text.NumberFormat;
+import java.util.List;
 import java.util.Locale;
 
 public class Tools {
@@ -65,5 +69,17 @@ public class Tools {
             case 3: return "Pesanan No."+id+" telah selesai";
             default: return "Pesanan No."+id+" gagal";
         }
+    }
+
+    public static void buildSpinner(
+            Context context,
+            NiceSpinner spinner,
+            List<String> datas,
+            OnSpinnerItemSelectedListener onSpinnerItemSelectedListener,
+            int idx
+    ){
+        spinner.attachDataSource(datas);
+        if(!datas.isEmpty()) spinner.setText(datas.get(idx));
+        spinner.setOnSpinnerItemSelectedListener(onSpinnerItemSelectedListener);
     }
 }

@@ -3,6 +3,7 @@ package com.creative.iam.laundryin.network;
 import com.creative.iam.laundryin.network.response.BaseDao;
 import com.creative.iam.laundryin.network.response.DoDeliveryResponseDao;
 import com.creative.iam.laundryin.network.response.DoOrderResponseDao;
+import com.creative.iam.laundryin.network.response.DoPacketResponseDao;
 import com.creative.iam.laundryin.network.response.DoTransactionResponseDao;
 import com.creative.iam.laundryin.network.response.DoUlasanResponseDao;
 import com.creative.iam.laundryin.network.response.GetAllOrderResponseDao;
@@ -10,6 +11,7 @@ import com.creative.iam.laundryin.network.response.GetAllPacketResponseDao;
 import com.creative.iam.laundryin.network.response.GetOrderResponseDao;
 import com.creative.iam.laundryin.network.response.GetProfileResponseDao;
 import com.creative.iam.laundryin.network.response.LoginResponseDao;
+import com.creative.iam.laundryin.network.response.UpdateStatusOrderResponseDao;
 
 import java.util.List;
 
@@ -67,6 +69,22 @@ public interface ApiInterface {
         @Field("id_paket") String id_paket,
         @Field("username") String username,
         @Field("ulasan") String ulasan
+    );
+
+    @POST("DoPacket.php")
+    @FormUrlEncoded
+    Call<BaseDao<DoPacketResponseDao>> doPacket(
+        @Field("nama_paket") String nama_paket,
+        @Field("harga_paket") String harga_paket,
+        @Field("estimasi_paket") String estimasi_paket,
+        @Field("keterangan") String keterangan,
+        @Field("url_picture") String url_picture
+    );
+    @POST("UpdateStatusOrder.php")
+    @FormUrlEncoded
+    Call<BaseDao<UpdateStatusOrderResponseDao>> updateStatusOrder(
+        @Field("id_order") String id_order,
+        @Field("status") String status
     );
 
     @GET("GetAllPackets.php")

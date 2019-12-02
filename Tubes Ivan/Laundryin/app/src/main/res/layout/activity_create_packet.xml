@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".views.registrasi.SignUpActivity"
+    android:layout_marginTop="24dp"
+    >
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            tools:ignore="MissingConstraints"
+            >
+            <TextView
+                android:layout_marginTop="32dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="32dp"
+                android:text="Buat Paket"
+                android:layout_marginHorizontal="32dp"
+                android:textColor="@color/colorBtnPrimary"
+                android:textSize="32dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_marginHorizontal="32dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nama Paket"
+                android:textSize="16dp" />
+
+            <EditText
+                android:layout_marginHorizontal="32dp"
+                android:id="@+id/etNama"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:background="@android:color/white"
+                android:elevation="2dp"
+                android:padding="12dp" />
+
+            <TextView
+                android:layout_marginHorizontal="32dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:text="Harga Paket"
+                android:textSize="16dp" />
+
+            <EditText
+                android:layout_marginHorizontal="32dp"
+                android:id="@+id/etPrice"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:background="@android:color/white"
+                android:elevation="2dp"
+                android:inputType="numberDecimal"
+                android:padding="12dp" />
+
+            <TextView
+                android:layout_marginHorizontal="32dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:text="Deskripsi Paket"
+                android:textSize="16dp" />
+
+            <EditText
+                android:layout_marginHorizontal="32dp"
+                android:id="@+id/etDescription"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:background="@android:color/white"
+                android:elevation="2dp"
+                android:inputType="textMultiLine"
+                android:gravity="top"
+                android:lines="6"
+                android:padding="12dp" />
+
+            <TextView
+                android:layout_marginHorizontal="32dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:text="Estimasi Pengerjaan ( hari )"
+                android:textSize="16dp" />
+
+            <EditText
+                android:layout_marginHorizontal="32dp"
+                android:id="@+id/etTime"
+                android:inputType="numberDecimal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:background="@android:color/white"
+                android:elevation="2dp"
+                android:padding="12dp"/>
+
+            <Button
+                android:layout_marginHorizontal="32dp"
+                android:id="@+id/btnDaftar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:background="@color/colorBtnPrimary"
+                android:padding="16dp"
+                android:layout_marginBottom="32dp"
+                android:text="Buat"
+                android:textColor="@android:color/white" />
+        </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
+</android.support.constraint.ConstraintLayout>

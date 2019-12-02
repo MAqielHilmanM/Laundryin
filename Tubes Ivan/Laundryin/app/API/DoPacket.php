@@ -26,7 +26,7 @@
 
 		$query = mysqli_query($con, "INSERT INTO `tb_paketlaundry` VALUES (null,'$nama_paket','$harga_paket','$estimasi_paket','$keterangan', '$url_picture')");
 
-		if ($query){po
+		if ($query){
 			$query2 = mysqli_query($con, "SELECT LAST_INSERT_ID() as lastId");
 			if($query2){
 				$response = new usr();

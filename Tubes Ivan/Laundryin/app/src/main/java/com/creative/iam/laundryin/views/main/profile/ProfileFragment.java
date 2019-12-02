@@ -72,10 +72,7 @@ public class ProfileFragment extends Fragment {
         profileSubFragment.setArguments(bundle);
         pager.addFragment(profileSubFragment, "Pesanan Laundry");
 
-        ProfileSubFragment profileSubFragment2 = new ProfileSubFragment();
-        Bundle bundle2 = new Bundle();
-        bundle2.putBoolean("isHistory",true);
-        profileSubFragment.setArguments(bundle2);
+        ProfileSubFragment2 profileSubFragment2 = new ProfileSubFragment2();
         pager.addFragment(profileSubFragment2, "History Transaksi");
 
         viewPager.setAdapter(pager);
