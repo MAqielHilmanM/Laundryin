@@ -8,11 +8,6 @@
         android:icon="@drawable/ic_home_black"/>
 
     <item
-        android:id="@+id/message_menu"
-        android:title="@string/message"
-        android:icon="@drawable/ic_message"/>
-
-    <item
         android:id="@+id/profile_menu"
         android:title="@string/profile"
         android:icon="@drawable/ic_account"/>

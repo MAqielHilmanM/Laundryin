@@ -40,8 +40,6 @@ public class UtamaActivity extends AppCompatActivity implements BottomNavigation
             case R.id.home_menu :
                 fragment = new HomeFragment();
                 break;
-            case R.id.message_menu :
-                break;
             case R.id.profile_menu :
                 fragment = new ProfileFragment();
                 break;

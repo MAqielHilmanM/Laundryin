@@ -47,4 +47,23 @@ public class Tools {
             tv.setText(Html.fromHtml(source));
         }
     }
+
+    public static String loadStatus(int status){
+        switch (status){
+            case 0: return "Menunggu DiAmbil";
+            case 1: return "Sedang DiCuci";
+            case 2: return "Sedang DiKirim";
+            case 3: return "Pesanan Selesai";
+            default: return "Pesanan Gagal";
+        }
+    }
+    public static String loadMessage(String id,int status){
+        switch (status){
+            case 0: return "Tunggu Pakaian Anda Diambil";
+            case 1: return "Pakaian Anda Sedang di cuci";
+            case 2: return "Pakaian Anda Sedang di kirim";
+            case 3: return "Pesanan No."+id+" telah selesai";
+            default: return "Pesanan No."+id+" gagal";
+        }
+    }
 }

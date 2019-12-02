@@ -32,6 +32,8 @@ import retrofit2.Response;
 
 public class PaketActivity extends AppCompatActivity {
 
+    private String paketId, paketName, paketEstimate = "";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -76,6 +78,10 @@ public class PaketActivity extends AppCompatActivity {
                     Tools.loadTextFromHTML(tvPaketPrice,"Harga : <font color=\"#2398CD\"> Rp. "+response.body().getData().getHarga_paket()+"</font>/ Kg");
                     Tools.loadTextFromHTML(tvDescDetail,response.body().getData().getKeterangan());
 
+                    paketId = response.body().getData().getId_paket();
+                    paketName = response.body().getData().getNama_paket();
+                    paketEstimate = response.body().getData().getEstimasi_paket();
+
                     lists.clear();
                     for (GetAllPacketResponseDao.UlasanResponseDao ulasan: response.body().getData().getUlasan()) {
                         lists.add(new PaketModel(
@@ -118,6 +124,9 @@ public class PaketActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(PaketActivity.this, ConfirmPesananActivity.class);
+                intent.putExtra("paketId",paketId);
+                intent.putExtra("paketName",paketName);
+                intent.putExtra("paketEstimate",paketEstimate);
                 startActivity(intent);
                 finish();
             }

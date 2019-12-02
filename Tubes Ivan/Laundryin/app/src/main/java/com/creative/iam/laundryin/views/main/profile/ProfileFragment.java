@@ -5,19 +5,34 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.creative.iam.laundryin.R;
+import com.creative.iam.laundryin.network.ApiClient;
+import com.creative.iam.laundryin.network.ApiInterface;
+import com.creative.iam.laundryin.network.response.BaseDao;
+import com.creative.iam.laundryin.network.response.GetProfileResponseDao;
+import com.creative.iam.laundryin.tools.Constant;
+import com.creative.iam.laundryin.tools.PreferencesUtils;
 import com.creative.iam.laundryin.views.login.LoginActivity;
 import com.creative.iam.laundryin.views.notification.NotifikasiActivity;
+import com.creative.iam.laundryin.views.order.confirm.ConfirmPesananActivity;
+import com.creative.iam.laundryin.views.order.success.PesanBerhasilActivity;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -37,6 +52,7 @@ public class ProfileFragment extends Fragment {
 
         initData(v);
         initListener(v);
+        loadProfile();
 
         return v;
     }
@@ -49,11 +65,50 @@ public class ProfileFragment extends Fragment {
         viewPager = v.findViewById(R.id.pager);
         tabLayout = v.findViewById(R.id.tablayout);
         ProfilePager pager = new ProfilePager(getChildFragmentManager());
-        pager.addFragment(new ProfileSubFragment(), "Pesanan Laundry");
-        pager.addFragment(new ProfileSubFragment(), "History Transaksi");
+
+        ProfileSubFragment profileSubFragment = new ProfileSubFragment();
+        Bundle bundle = new Bundle();
+        bundle.putBoolean("isHistory",false);
+        profileSubFragment.setArguments(bundle);
+        pager.addFragment(profileSubFragment, "Pesanan Laundry");
+
+        ProfileSubFragment profileSubFragment2 = new ProfileSubFragment();
+        Bundle bundle2 = new Bundle();
+        bundle2.putBoolean("isHistory",true);
+        profileSubFragment.setArguments(bundle2);
+        pager.addFragment(profileSubFragment2, "History Transaksi");
+
         viewPager.setAdapter(pager);
         tabLayout.setupWithViewPager(viewPager);
 
+        ivProfilePictures.setImageResource(R.drawable.basil);
+    }
+
+    private void loadProfile(){
+        PreferencesUtils sp = new PreferencesUtils(getActivity().getApplicationContext());
+        String username = sp.get("uname", Constant.SAVED_USERNAME);
+
+        ApiInterface apiInterface = new ApiClient().getClient(Constant.BASE_URL).create(ApiInterface.class);
+        apiInterface.getProfile(
+            username
+        ).enqueue(new Callback<BaseDao<GetProfileResponseDao>>() {
+            @Override
+            public void onResponse(Call<BaseDao<GetProfileResponseDao>> call, Response<BaseDao<GetProfileResponseDao>> response) {
+                if(response.body().getCode() == 1){
+                    tvProfileTitle.setText(response.body().getData().getNama());
+                    tvProfileAddress.setText(response.body().getData().getAlamat());
+                }else {
+                    Toast.makeText(getActivity().getApplicationContext(), "Delete", Toast.LENGTH_SHORT).show();
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<BaseDao<GetProfileResponseDao>> call, Throwable t) {
+                Log.e(this.getClass().getSimpleName(), "onFailure: "+t.getMessage() );
+                Toast.makeText(getActivity(), t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     private void initListener(View v) {
@@ -61,8 +116,8 @@ public class ProfileFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), LoginActivity.class);
-                SharedPreferences sharedPreferences = getActivity().getSharedPreferences("my_shared_preferences", Context.MODE_PRIVATE);
-                sharedPreferences.edit().clear().apply();
+                PreferencesUtils sp = new PreferencesUtils(getActivity().getApplicationContext());
+                sp.clear();
                 getActivity().startActivity(intent);
                 getActivity().finish();
             }

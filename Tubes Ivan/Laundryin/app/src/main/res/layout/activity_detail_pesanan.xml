@@ -56,12 +56,14 @@
                         android:padding="16dp">
 
                         <TextView
+                            android:id="@+id/tvDetailId"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="No.Pesanan : LDN92389"
                             android:textSize="16sp" />
 
                         <TextView
+                            android:id="@+id/tvDetailStatus"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="12dp"
@@ -93,6 +95,7 @@
                         android:textStyle="bold" />
 
                     <TextView
+                        android:id="@+id/tvDetailAddress"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="12dp"
@@ -100,6 +103,7 @@
                         android:text="Jalan Telekomunikasi No.1,Dayeuhkolot, Bandung, Indonesia" />
 
                     <TextView
+                        android:visibility="gone"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="12dp"
@@ -136,7 +140,8 @@
                             android:textSize="16sp"
                             android:textStyle="bold" />
 
-                        <Button
+                        <TextView
+                            android:id="@+id/tvDetailDone"
                             android:layout_width="wrap_content"
                             android:layout_height="32dp"
                             android:background="@drawable/shape_button"
@@ -164,6 +169,7 @@
                             android:textStyle="bold" />
 
                         <TextView
+                            android:id="@+id/tvDetailPaketEstimate"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="4 Hari"
@@ -187,6 +193,7 @@
                             android:textStyle="bold" />
 
                         <TextView
+                            android:id="@+id/tvDetailPaketName"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Paket Hemat"
@@ -229,37 +236,15 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="Kaos"
+                            android:text="Total Berat"
                             android:textSize="16sp"
                             android:textStyle="bold" />
 
                         <TextView
+                            android:id="@+id/tvDetailWeight"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="5 Pcs"
-                            android:textSize="16sp"
-                            android:textStyle="bold" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="16dp"
-                        android:layout_weight="1"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text="Celana"
-                            android:textSize="16sp"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="3 Pcs"
+                            android:text="3 KG"
                             android:textSize="16sp"
                             android:textStyle="bold" />
                     </LinearLayout>
@@ -280,6 +265,7 @@
                             android:textStyle="bold" />
 
                         <TextView
+                            android:id="@+id/tvDetailTotal"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="8 Pcs"
@@ -303,6 +289,7 @@
                             android:textStyle="bold" />
 
                         <TextView
+                            android:id="@+id/tvDetailPrice"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Rp. 25.000"
@@ -326,6 +313,7 @@
                             android:textStyle="bold" />
 
                         <TextView
+                            android:id="@+id/tvDetailIsPaid"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Dibayar"

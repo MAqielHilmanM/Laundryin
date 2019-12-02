@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -20,8 +21,10 @@ import com.creative.iam.laundryin.network.ApiInterface;
 import com.creative.iam.laundryin.network.response.BaseDao;
 import com.creative.iam.laundryin.network.response.LoginResponseDao;
 import com.creative.iam.laundryin.tools.Constant;
+import com.creative.iam.laundryin.tools.PreferencesUtils;
 import com.creative.iam.laundryin.tools.Tools;
 import com.creative.iam.laundryin.views.main.UtamaActivity;
+import com.creative.iam.laundryin.views.registrasi.SignUpActivity;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -33,24 +36,9 @@ public class LoginActivity extends AppCompatActivity {
     EditText etLoginUser, etLoginPass;
     Button btnLogin;
     TextView tvRegister;
-    Intent intent;
 
-    int success;
     ConnectivityManager conMgr;
     private static final String TAG = LoginActivity.class.getSimpleName();
-
-    private static final String TAG_SUCCESS = "success";
-    private static final String TAG_MESSAGE = "message";
-
-    public final static String TAG_USERNAME = "username";
-
-    String tag_json_obj = "json_obj_req";
-
-    SharedPreferences sharedPreferences;
-    Boolean session = false;
-    String username;
-    public static final String my_shared_preferences = "my_shared_preferences";
-    public static final String session_status = "session_status";
 
 
     @Override
@@ -76,13 +64,12 @@ public class LoginActivity extends AppCompatActivity {
         Tools.loadTextFromHTML(tvRegister,
                 "Belum punya akun ? <b><font color=\"#2398CD\"> Daftar </font></b>");
 
-        sharedPreferences = getSharedPreferences(my_shared_preferences, Context.MODE_PRIVATE);
-        session = sharedPreferences.getBoolean(session_status, false);
-        username = sharedPreferences.getString(TAG_USERNAME, null);
+        PreferencesUtils sp = new PreferencesUtils(getApplicationContext());
+        String username = sp.get("uname",null);
 
-        if (session) {
+        if (username != null) {
             Intent intent = new Intent(LoginActivity.this, UtamaActivity.class);
-            intent.putExtra(TAG_USERNAME, username);
+            intent.putExtra("username", username);
             finish();
             startActivity(intent);
         }
@@ -107,6 +94,13 @@ public class LoginActivity extends AppCompatActivity {
                 }
             }
         });
+
+        tvRegister.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(LoginActivity.this, SignUpActivity.class));
+            }
+        });
     }
 
     private void checkLogin(final String username, final String password) {
@@ -121,7 +115,13 @@ public class LoginActivity extends AppCompatActivity {
             public void onResponse(Call<BaseDao<LoginResponseDao>> call, Response<BaseDao<LoginResponseDao>> response) {
                 hideDialog();
                 if(response.body().getCode() == 1){
-                    sharedPreferences.edit().putString(TAG_USERNAME,response.body().getData().getUsername()).putBoolean(session_status,true).apply();
+                    PreferencesUtils sp = new PreferencesUtils(getApplicationContext());
+                    sp.set("uname",username);
+                    sp.set("address",response.body().getData().getAlamat());
+
+                    Constant.SAVED_USERNAME = response.body().getData().getUsername();
+                    Constant.SAVED_ADDRESS = response.body().getData().getAlamat();
+
                     Intent intent = new Intent(LoginActivity.this, UtamaActivity.class);
                     startActivity(intent);
                     finish();

@@ -51,6 +51,7 @@
                         android:textStyle="bold" />
 
                     <TextView
+                        android:id="@+id/tvConfirmAddress"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="12dp"
@@ -58,6 +59,7 @@
                         android:text="Jalan Telekomunikasi No.1,Dayeuhkolot, Bandung, Indonesia" />
 
                     <TextView
+                        android:id="@+id/tvChangeAddress"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="12dp"
@@ -93,7 +95,8 @@
                             android:textSize="16sp"
                             android:textStyle="bold" />
 
-                        <Button
+                        <TextView
+                            android:id="@+id/tvConfirmDate"
                             android:layout_width="wrap_content"
                             android:layout_height="32dp"
                             android:background="@drawable/shape_button"
@@ -121,6 +124,7 @@
                             android:textStyle="bold" />
 
                         <TextView
+                            android:id="@+id/tvConfirmDay"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="4 Hari"
@@ -144,6 +148,7 @@
                             android:textStyle="bold" />
 
                         <TextView
+                            android:id="@+id/tvConfirmPacket"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Paket Hemat"

@@ -9,24 +9,19 @@ import com.creative.iam.laundryin.R;
 
 public class ProfileSubModel{
     private String id;
-    private String status;
-    private String pictures;
+    private int status;
 
-    public ProfileSubModel(String id, String status, String pictures) {
+    public ProfileSubModel(String id, int status) {
         this.id = id;
         this.status = status;
-        this.pictures = pictures;
     }
 
     public String getId() {
         return id;
     }
 
-    public String getStatus() {
+    public int getStatus() {
         return status;
     }
 
-    public String getPictures() {
-        return pictures;
-    }
 }

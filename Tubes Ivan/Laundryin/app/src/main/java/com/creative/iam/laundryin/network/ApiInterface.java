@@ -7,6 +7,7 @@ import com.creative.iam.laundryin.network.response.DoTransactionResponseDao;
 import com.creative.iam.laundryin.network.response.GetAllOrderResponseDao;
 import com.creative.iam.laundryin.network.response.GetAllPacketResponseDao;
 import com.creative.iam.laundryin.network.response.GetOrderResponseDao;
+import com.creative.iam.laundryin.network.response.GetProfileResponseDao;
 import com.creative.iam.laundryin.network.response.LoginResponseDao;
 
 import java.util.List;
@@ -40,7 +41,9 @@ public interface ApiInterface {
     @FormUrlEncoded
     Call<BaseDao<DoOrderResponseDao>> doOrder(
         @Field("username") String username,
-        @Field("id_paket") String idPaket
+        @Field("id_paket") String idPaket,
+        @Field("catatan") String catatan,
+        @Field("address") String address
     );
 
     @POST("DoTransaction.php")
@@ -66,13 +69,18 @@ public interface ApiInterface {
     );
 
     @GET("GetAllOrder.php")
-    Call<BaseDao<GetAllOrderResponseDao>> getAllOrder(
+    Call<BaseDao<List<GetAllOrderResponseDao>>> getAllOrder(
             @Query("username") String username
     );
 
     @GET("GetOrder.php")
     Call<BaseDao<GetOrderResponseDao>> getOrder(
             @Query("id_order") String id_order
+    );
+
+    @GET("GetProfile.php")
+    Call<BaseDao<GetProfileResponseDao>> getProfile(
+            @Query("username") String username
     );
 
 }

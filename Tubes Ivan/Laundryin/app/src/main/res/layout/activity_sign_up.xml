@@ -13,7 +13,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="32dp"
+        android:layout_marginVertical="32dp"
         android:orientation="vertical"
         tools:ignore="MissingConstraints"
         >
@@ -22,26 +22,30 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="32dp"
             android:text="Laundryin"
+            android:layout_marginHorizontal="32dp"
             android:textColor="@color/colorBtnPrimary"
             android:textSize="32dp"
             android:textStyle="bold" />
 
         <TextView
+            android:layout_marginHorizontal="32dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Nama Lengkap"
             android:textSize="16dp" />
 
         <EditText
+            android:layout_marginHorizontal="32dp"
             android:id="@+id/etNama"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:background="@android:color/white"
-            android:elevation="5dp"
+            android:elevation="2dp"
             android:padding="12dp" />
 
         <TextView
+            android:layout_marginHorizontal="32dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
@@ -49,16 +53,18 @@
             android:textSize="16dp" />
 
         <EditText
+            android:layout_marginHorizontal="32dp"
             android:id="@+id/etUsername"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:background="@android:color/white"
-            android:elevation="5dp"
+            android:elevation="2dp"
             android:inputType="textPassword"
             android:padding="12dp" />
 
         <TextView
+            android:layout_marginHorizontal="32dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
@@ -66,16 +72,18 @@
             android:textSize="16dp" />
 
         <EditText
+            android:layout_marginHorizontal="32dp"
             android:id="@+id/etPass"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:background="@android:color/white"
-            android:elevation="5dp"
+            android:elevation="2dp"
             android:inputType="textPassword"
             android:padding="12dp" />
 
         <TextView
+            android:layout_marginHorizontal="32dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
@@ -83,15 +91,18 @@
             android:textSize="16dp" />
 
         <EditText
+            android:layout_marginHorizontal="32dp"
             android:id="@+id/etTelp"
+            android:inputType="phone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:background="@android:color/white"
-            android:elevation="5dp"
+            android:elevation="2dp"
             android:padding="12dp"/>
 
         <TextView
+            android:layout_marginHorizontal="32dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
@@ -99,15 +110,17 @@
             android:textSize="16dp" />
 
         <EditText
+            android:layout_marginHorizontal="32dp"
             android:id="@+id/etAlamat"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:background="@android:color/white"
-            android:elevation="5dp"
+            android:elevation="2dp"
             android:padding="12dp" />
 
-        <android.support.design.button.MaterialButton
+        <Button
+            android:layout_marginHorizontal="32dp"
             android:id="@+id/btnDaftar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
